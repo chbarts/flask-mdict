@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{url_for('.static', filename='css/mdict.css')}}">
 {% endblock %}
 
-{% block subtitle %}All Headwords - {{config.APP_NAME}}{% endblock %}
+{% block subtitle %}{{title|safe}} Headwords - {{config.APP_NAME}}{% endblock %}
 
 {% block navmenu %}
     <form method="POST" action="{{url_for('.query_word_all')}}" class="col">
