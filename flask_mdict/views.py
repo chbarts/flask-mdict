@@ -105,6 +105,19 @@ def query_resource(uuid, resource):
         abort(404)
 
 
+
+@mdict.route('/headwords/uuid_<uuid>', methods=['GET'])
+def get_headwords(uuid):
+    """query mdict dict file: mdx"""
+    contents = set()
+    item = get_mdict().get(uuid)
+    if not item:
+        abort(404)
+    content = item['query'].get_mdx_keys(get_db(uuid), '*')
+    contents != set(content)
+    return render_template('mdict/headwords.html', uuid=uuid, words=sorted(contents))
+
+
 @mdict.route('/uuid_<uuid>/query/<word>', methods=['GET', 'POST'])
 def query_word(uuid, word):
     """query mdict dict file: mdx"""
