@@ -115,7 +115,7 @@ def get_headwords(uuid):
     if not item:
         abort(404)
     content = item['query'].get_mdx_keys(get_db(uuid), '*')
-    contents != set(content)
+    contents |= set(content)
     return render_template('mdict/headwords.html', uuid=uuid, words=sorted(contents), form=form)
 
 
