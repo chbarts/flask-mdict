@@ -116,7 +116,7 @@ def get_headwords(uuid):
         abort(404)
     content = item['query'].get_mdx_keys(get_db(uuid), '*')
     contents |= set(content)
-    return render_template('mdict/headwords.html', uuid=uuid, title=item['query'].title(), words=sorted(contents), form=form)
+    return render_template('mdict/headwords.html', uuid=uuid, dname=item['title'], words=sorted(contents), form=form)
 
 
 @mdict.route('/uuid_<uuid>/query/<word>', methods=['GET', 'POST'])
