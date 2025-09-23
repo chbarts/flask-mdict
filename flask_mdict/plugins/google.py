@@ -9,7 +9,7 @@ def translate(content, item):
             content,
             translator='google',
             from_language=item.get('from_lan', 'auto'),
-            to_language=item.get('to_lan', 'en-US'),
+            to_language=item.get('to_lan', 'en'),
         )
         return [text]
     except Exception as err:
