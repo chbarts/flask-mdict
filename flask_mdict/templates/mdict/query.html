@@ -49,7 +49,9 @@
                         <input type="checkbox" name="mdict_enable" value="{{uuid}}" class="form-check-input" {{'checked' if item.enable}}/>
                         <label class="form-check-label">
                             <a href="#{{uuid}}">{{item.title|safe}}</a>
-                            (<a href="{{url_for('.get_headwords', uuid=uuid)}}">Headwords</a>)
+                            {% if item.type != "app" %}
+                                (<a href="{{url_for('.get_headwords', uuid=uuid)}}">Headwords</a>)
+                            {% endif %}
                             <small data-toggle="modal" data-target="#about_{{uuid}}">
                                 <i class="fas fa-info-circle"></i>
                             </small>

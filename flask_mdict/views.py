@@ -222,6 +222,7 @@ def query_word(uuid, word):
         'about': about,
         'content': html_content,
         'enable': item['enable'],
+        'type': item['type'],
     }
     word_meta = helper.query_word_meta(word)
     if not nohistory and found_word:
@@ -336,6 +337,7 @@ def query_word_all():
             'about': about,
             'content': html_content,
             'enable': item['enable'],
+            'type': item['type'],
         }
 
     word_meta = helper.query_word_meta(word)
