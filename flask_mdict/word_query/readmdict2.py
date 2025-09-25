@@ -3,6 +3,22 @@ from struct import unpack
 from .readmdict import MDX as MDXBase, MDD as MDDBase
 
 
+def find_encoding(istr):
+    try:
+        istr.decode('utf-8')
+        return 'utf-8'
+    except UnicodeDecodeError:
+        try:
+            istr.decode('utf-16')
+            return 'utf-16'
+        except UnicodeDecodeError:
+            try:
+                istr.decode('gb18030')
+                return 'gb18030'
+            except UNicodeDecodeError:
+                return ''
+
+
 class Index():
     def get_index(self, check_block=True):
         if self._version >= 3:
@@ -61,7 +77,11 @@ class Index():
 
                 record_start, key_text = self._key_list[i]
                 index_dict['record_start'] = record_start
-                index_dict['key_text'] = key_text.decode("utf-8")
+                tenc = find_encoding(key_text)
+                if len(tenc) > 0:
+                    index_dict['key_text'] = key_text.decode(tenc)
+                else: # Probably gonna lose...
+                    index_dict['key_text'] = key_text.decode(encoding='utf-8', errors='ignore')
                 index_dict['offset'] = offset
 
                 # reach the end of current record block
@@ -84,6 +104,11 @@ class Index():
         f.close()
         # 这里比 mdd 部分稍有不同，应该还需要传递编码以及样式表信息
         meta = {}
+        tenc = find_encoding(self.header[b'Title'])
+        if len(tenc) > 0:
+            self._encoding = tenc
+        else:
+            self._encoding = 'UTF-8'
         meta['encoding'] = self._encoding
         meta['stylesheet'] = self._stylesheet
         meta['version'] = self._version
