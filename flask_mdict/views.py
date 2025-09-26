@@ -234,7 +234,7 @@ def query_word(uuid, word):
         word=word,
         word_meta=word_meta,
         history=history,
-        contents=contents,
+        contents=contents.items(),
         message=message,
     )
 
