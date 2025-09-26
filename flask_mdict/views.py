@@ -15,7 +15,7 @@ from . import helper
 
 regex_word_link = re.compile(r'^(@@@LINK=)(.+)$')
 # img src
-regex_src_schema = re.compile(r'([ "]src=["\'])(/|file:///)?(?!data:)(.+?["\'])')
+regex_src_schema = re.compile(r'([ "]src=["\'])(/|file:///)?(?!data:)?(?!https?:)(.+?["\'])')
 # http://.../
 regex_href_end_slash = re.compile(r'([ "]href=["\'].+?)(/)(["\'])')
 # sound://
