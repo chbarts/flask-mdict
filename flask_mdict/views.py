@@ -351,7 +351,7 @@ def query_word_all():
         word=word,
         word_meta=word_meta,
         history=history,
-        contents=contents,
+        contents=sorted(contents.items(), key=lambda item: item[1]['title']),
         message=message,
     )
 
