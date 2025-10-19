@@ -15,7 +15,7 @@ def find_encoding(istr):
             try:
                 istr.decode('gb18030')
                 return 'gb18030'
-            except UNicodeDecodeError:
+            except UnicodeDecodeError:
                 return ''
 
 
